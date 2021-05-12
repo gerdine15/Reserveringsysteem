@@ -5,22 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Clubnumber extends Model
+class Clubs extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'logo',
+        'name',
         'number',
+        'logo',
     ];
 
-    public function lane()
+    public function setting()
     {
-        return $this->belongsTo(Lane::class);
+        return $this->belongsTo(Setting::class);
     }
 
-    public function reservation()
+    public function courts()
     {
-        return $this->belongsTo(Reservation::class);
+        return $this->hasMany(Court::class);
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClubnumbersTable extends Migration
+class CreateClubsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +15,9 @@ class CreateClubnumbersTable extends Migration
     {
         Schema::create('clubs', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('number')->unique();
             $table->text('logo');
-            $table->bigInteger('number');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateClubnumbersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clubnumbers');
+        Schema::dropIfExists('clubs');
     }
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Lane extends Model
+class Court extends Model
 {
     use HasFactory;
 
@@ -14,13 +14,13 @@ class Lane extends Model
         'type',
     ];
 
-    public function clubnumber()
+    public function club()
     {
-        return $this->belongsTo(Clubnumber::class);
+        $this->belongsTo(Club::class);
     }
 
-    public function reservation()
+    public function reservations()
     {
-        return $this->belongsTo(Reservation::class);
+        $this->hasMany(Reservation::class);
     }
 }

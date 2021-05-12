@@ -10,20 +10,14 @@ class Reservation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'date',
         'starttime',
         'endtime',
         'nameEvent',
     ];
 
-    public function clubnummer()
+    public function court()
     {
-        return $this->belongsTo(Clubnumber::class);
-    }
-
-    public function lane()
-    {
-        return $this->belongsTo(Lane::class);
+        return $this->belongsTo(Court::class);
     }
 
     public function users()

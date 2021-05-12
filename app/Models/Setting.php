@@ -15,4 +15,9 @@ class Setting extends Model
         'startdate',
         'enddate',
     ];
+
+    public function club()
+    {
+        return $this->hasOne(Club::class);
+    }
 }
