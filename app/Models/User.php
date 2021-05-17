@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use function PHPSTORM_META\map;
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -23,6 +25,8 @@ class User extends Authenticatable
         'email',
         'password',
         'member',
+        'roles_id',
+        'clubs_id',
     ];
 
     /**
@@ -52,5 +56,10 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function club()
+    {
+        return $this->belongsTo(Club::class);
     }
 }

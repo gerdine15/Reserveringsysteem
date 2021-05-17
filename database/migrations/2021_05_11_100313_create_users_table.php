@@ -27,6 +27,9 @@ class CreateUsersTable extends Migration
 
             $table->unsignedBigInteger('roles_id')->nullable();
             $table->foreign('roles_id')->references('id')->on('roles')->onDelete('cascade');
+
+            $table->unsignedBigInteger('clubs_id')->nullable();
+            $table->foreign('clubs_id')->references('id')->on('clubs')->onDelete('cascade');
         });
     }
 

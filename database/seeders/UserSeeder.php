@@ -30,6 +30,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('admin'),
             'member' => '12345678',
             'roles_id' => 2,
+            'clubs_id' => 1,
         ]);
         DB::table('users')->insert([
             'firstname' => 'lid',
@@ -38,6 +39,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('admin'),
             'member' => '87654321',
             'roles_id' => 3,
+            'clubs_id' => 1,
         ]);
     }
 }
