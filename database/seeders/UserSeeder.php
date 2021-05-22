@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@tennisvereniging.nl',
             'password' => Hash::make('admin'),
             'roles_id' => 1,
+            'clubs_id' => 1,
         ]);
         DB::table('users')->insert([
             'firstname' => 'Gedelegeerd',

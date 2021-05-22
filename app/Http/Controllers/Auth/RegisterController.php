@@ -52,7 +52,8 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        return Validator::make($data,
+        [
             'firstname' => ['required', 'string', 'max:255'],
             'prefix' => ['string', 'max:255', 'nullable'],
             'lastname' => ['required', 'string', 'max:255'],
@@ -60,6 +61,23 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'clubNumber' => ['required', 'exists:clubs,number'],
             'member' => ['required'],
+        ],
+        [
+            'firstname.required' => 'Dit veld is verplicht.',
+            'firstname.max' => 'Voornaam mag niet meer dan 255 tekens zijn.',
+            'prefix.max' => 'Tussenvoegel mag niet meer dan 255 tekens zijn.',
+            'lastname.required' => 'Dit veld is verplicht.',
+            'lastname.max' => 'Achternaam mag niet meer dan 255 tekens zijn.',
+            'email.required' => 'Dit veld is verplicht.',
+            'email.email' => 'Het moet een geldig emailadres zijn.',
+            'email.unique' => 'Dit emailadres is al in gebruik.',
+            'email.max' => 'Email mag niet meer dan 255 tekens zijn.',
+            'password.required' => 'Dit veld is verplicht.',
+            'password.min' => 'Wachtwoord moet uit minimaal 8 tekens bestaan.',
+            'password.confirmed' => 'Wachtwoorden komen niet overeen.',
+            'clubNumber.required' => 'Dit veld is verplicht.',
+            'clubNumber.exists' => 'Dit is geen geldig clubnummer',
+            'member.required' => 'Dit veld is verplicht.',
         ]);
     }
 

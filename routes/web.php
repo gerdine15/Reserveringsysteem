@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\CourtController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,12 +24,13 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::resource('reservation', 'ReservationController');
-    Route::resource('setting', 'SettingController');
-    Route::resource('court', 'CourtController');
-    Route::resource('user', 'UserController');
+    Route::resource('reservation', ReservationController::class);
+    Route::resource('setting', SettingController::class);
+    // Route::put('setting/{id}/update', 'SettingController@update')->where('id', '[1-9][0-9]*');
+    Route::resource('court', CourtController::class);
+    Route::resource('user', UserController::class);
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');

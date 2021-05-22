@@ -15,10 +15,10 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->integer('timeslot');
-            $table->string('amountOfReservations');
-            $table->date('startdate');
-            $table->date('enddate');
+            $table->integer('timeslot')->default(60);
+            $table->integer('amountOfReservations')->default(2);
+            $table->date('startdate')->nullable();
+            $table->date('enddate')->nullable();
             $table->timestamps();
 
             $table->unsignedBigInteger('clubs_id')->nullable();
