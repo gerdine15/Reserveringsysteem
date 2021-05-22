@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             ClubSeeder::class,
             UserSeeder::class,
             SettingSeeder::class,
+            CourtSeeder::class,
         ]);
     }
 }

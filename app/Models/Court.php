@@ -12,6 +12,7 @@ class Court extends Model
     protected $fillable = [
         'number',
         'type',
+        'clubs_id',
     ];
 
     public function club()

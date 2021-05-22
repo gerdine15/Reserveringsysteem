@@ -59,11 +59,11 @@
                     </div>
 
                     {{-- Redirect naar het banen overzicht. --}}
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <div>
                             <a type="button" class="btn btn-primary">Banen overzicht</a>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group">
                         <div>
@@ -71,12 +71,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col date">
                     <div class="form-group">
                         <label for="startdate">Start datum nieuwe reserveringsslot:</label>
 
                         <div>
-                            <input type="text" id="startdate" name="startdate" value="{{ old('startdate') }}">
+                            <input type="date" id="startdate" name="startdate" value="{{ $setting->startdate ?? old('startdate') }}">
 
                             @error('startdate')
                                 <span class="invalid-feedback" role="alert">
@@ -90,7 +90,7 @@
                         <label for="enddate">Tot</label>
 
                         <div>
-                            <input type="text" id="enddate" name="enddate" value="{{ old('enddate') }}">
+                            <input type="date" id="enddate" name="enddate" value="{{ $setting->enddate ?? old('enddate') }}">
 
                             @error('enddate')
                                 <span class="invalid-feedback" role="alert">
