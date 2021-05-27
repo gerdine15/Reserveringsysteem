@@ -26,14 +26,9 @@ class SettingController extends Controller
         DB::beginTransaction();
 
         $validated = $request->validated();
-        // dd($setting);
 
         try
         {
-            // $setting = Setting::where('clubs_id', $user->clubs_id)->first();
-
-            // dd($user);
-
             $setting->amountOfReservations = $validated['amountOfReservations'];
             if ($validated['timeslot'] !== $setting->timeslot)
             {

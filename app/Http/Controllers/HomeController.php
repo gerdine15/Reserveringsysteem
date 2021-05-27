@@ -28,27 +28,34 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
         $courts = Court::where('clubs_id', $user->clubs_id)->get();
         $setting = Setting::where('clubs_id', $user->clubs_id)->first();
         $reservations = [];
 
+        if ($request->date) {
+            $date = Carbon::parse($request->date);
+        } else {
+            $date = Carbon::today();
+        }
+
         foreach ($courts as $court)
         {
-            $reservations[] = Reservation::where('courts_id', $court->id)->get();
+            $reservations[] = Reservation::where('courts_id', $court->id)
+                                            ->whereDate('starttime', $date)
+                                            ->get();
         }
 
         // dd($reservations);
 
         $starttime = 8 * 60;
         $endtime = 23 * 60;
-        $timeslot = $setting->timeslot;
+        // $timeslot = $setting->timeslot;
 
-        $date = Date('l d F Y');
-
-        // $starttime =
+        // $previousDay = $date->copy()->subDays();
+        // $nextDay = $date->copy()->addDay();
 
         return view('home',
         [
@@ -56,8 +63,10 @@ class HomeController extends Controller
             'reservations' => $reservations,
             'starttime' => $starttime,
             'endtime' => $endtime,
-            'timeslot' => $timeslot,
+            'timeslot' => $setting->timeslot,
             'date' => $date,
+            'previousDay' => $date->copy()->subDays(),
+            'nextDay' => $date->copy()->addDay(),
         ]);
     }
 }

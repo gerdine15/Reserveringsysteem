@@ -40,9 +40,9 @@
                                     <a href="{{ url('/setting') }}" class="nav-link">Instellingen</a>
                                 </li>
 
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{ url('/users') }}" class="nav-link">Gebruikers</a>
-                                </li>
+                                </li> --}}
                             @endif
                         @endauth
                     </ul>

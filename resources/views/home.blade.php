@@ -4,24 +4,33 @@
 <div class="container">
     @if (session('success'))
         <div class="alert alert-success">
-        {{ session('success') }}
+            {{ session('success') }}
         </div>
     @endif
 
     @if (session('error'))
         <div class="alert alert-danger">
-        {{ session('error') }}
+            {{ session('error') }}
         </div>
     @endif
 
     <div class="row title-wrap text-center mb-2">
         <div class="col-md-12">
             <h3>
-                <i class="fas fa-chevron-left"></i>
-                {{ $date }}
-                <i class="fas fa-chevron-right"></i>
+                <a href="{{ url("/home?date=" . $previousDay->format('Y-m-d')) }}" class="text-decoration-none text-dark">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+
+                <span class="currentDate">
+                    {{ $date->format('l d F Y') }}
+                </span>
+
+                <input type="date" class="d-none" id="newDate" name="date">
+
+                <a href="{{ url("/home?date=" . $nextDay->format('Y-m-d')) }}" class="text-decoration-none text-dark">
+                    <i class='fas fa-chevron-right'></i>
+                </a>
             </h3>
-            <input type="date" class="d-none">
         </div>
     </div>
 
@@ -41,8 +50,9 @@
                         </td>
                         @foreach($reservations as $reservation)
                             <td>
+
                                 @foreach ($reservation as $item)
-                                    @if (date('H:i:s', mktime($i / 60, $i % 60, 0)) == $item->starttime)
+                                    @if (date('H:i', mktime($i / 60, $i % 60)) == date("H:i",strtotime($item->starttime)))
                                         Gereserveerd
                                     @endif
                                 @endforeach
