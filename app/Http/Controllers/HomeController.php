@@ -52,10 +52,6 @@ class HomeController extends Controller
 
         $starttime = 8 * 60;
         $endtime = 23 * 60;
-        // $timeslot = $setting->timeslot;
-
-        // $previousDay = $date->copy()->subDays();
-        // $nextDay = $date->copy()->addDay();
 
         return view('home',
         [

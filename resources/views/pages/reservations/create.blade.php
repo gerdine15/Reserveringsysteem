@@ -25,14 +25,16 @@
 
     <div class="row">
         <div class="col-md-7 col-sm-12">
-            <form action="{{ action('ReservationController@store') }}" class="form-horizontal mt-4 row" method="POST">
+            <form action="{{ route('reservation.store', ['information' => $information]) }}" class="form-horizontal mt-4 row" method="POST">
             @csrf
                 <div class="col">
                     <div class="form-group">
                         <label for="reservationUser">Gereserveerd door:</label>
 
                         <div class="font-weight-bold">
-                            {{ $reservation->user }}
+                            {{ $user->firstname }}
+                            {{ $user->prefix }}
+                            {{ $user->lastname }}
                         </div>
                     </div>
 
@@ -40,7 +42,7 @@
                         <label for="date">Datum:</label>
 
                         <div class="font-weight-bold">
-                            {{ $reservation->date }}
+                            <input type="text" value="{{ $information->starttime->format('l d F Y') }}" name="date" id="date" disabled>
                         </div>
                     </div>
 
@@ -48,7 +50,7 @@
                         <label for="time">Tijd:</label>
 
                         <div class="font-weight-bold">
-                            {{ $reservation->starttime }} - {{ $reservation->endtime }}
+                            {{ $information->starttime->format('H:i') }} - {{ $information->endtime->format('H:i') }}
                         </div>
                     </div>
 
@@ -56,7 +58,8 @@
                         <label for="courtType">Baan en type:</label>
 
                         <div class="font-weight-bold">
-                            {{ $reservation->courtNumber }} | {{ $reservation->courtType }}
+                            <input type="hidden" id="courts_id" name="courts_id" value="{{ $information->courts_id }}">
+                            {{ $information->courtNumber }} | {{ $information->courtType }}
                         </div>
                     </div>
                 </div>
@@ -79,6 +82,10 @@
                                 </span>
                             @enderror
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="opslaan" class="btn btn-secondary">
                     </div>
                 </div>
             </form>

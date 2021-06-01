@@ -13,4 +13,6 @@ $('#newDate').on('change', function(e) {
     newDate.classList.add('d-none');
 });
 
-
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })

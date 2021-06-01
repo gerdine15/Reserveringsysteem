@@ -48,16 +48,27 @@
                         <td>
                             {{date('H:i', mktime($i / 60, $i % 60))}}
                         </td>
-                        @foreach($reservations as $reservation)
-                            <td>
 
-                                @foreach ($reservation as $item)
-                                    @if (date('H:i', mktime($i / 60, $i % 60)) == date("H:i",strtotime($item->starttime)))
-                                        Gereserveerd
-                                    @endif
-                                @endforeach
+                        @for ($c = 0; $c < $courts->count(); $c++)
+                            <td>
+                                @php
+                                    $s = $reservations[$c]->filter(function ($value, $key) use ($i) {
+                                        return date('H:i', mktime($i / 60, $i % 60)) == date("H:i",strtotime($value->starttime));
+                                    })
+                                @endphp
+
+                                @if (isset($s[0]))
+                                    Gereserveerd
+                                @else
+                                    <form action="{{ url('/reservation/create') }}">
+                                        <input type="hidden" id="time" name="time" value="{{ date('H:i', mktime($i / 60, $i % 60)) }}">
+                                        <input type="hidden" id="date" name="date" value="{{ $date }}">
+                                        <input type="hidden" id ="courts_id" name="courts_id" value="{{ $courts[$c]->id }}">
+                                        <input type="submit" class="btn btn-primary" value="Reserveren">
+                                    </form>
+                                @endif
                             </td>
-                        @endforeach
+                        @endfor
                     </tr>
                 @endfor
             </tbody>
