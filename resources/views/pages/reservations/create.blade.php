@@ -31,6 +31,7 @@
                     <div class="form-group">
                         <label for="reservationUser">Gereserveerd door:</label>
 
+                        <input type="hidden" value={{ $user->id }} name="userId" id="userId">
                         <div class="font-weight-bold">
                             {{ $user->firstname }}
                             {{ $user->prefix }}
@@ -42,7 +43,8 @@
                         <label for="date">Datum:</label>
 
                         <div class="font-weight-bold">
-                            <input type="text" value="{{ $information->starttime->format('l d F Y') }}" name="date" id="date" disabled>
+                            <input type="hidden" value="{{ $information->date->format('Y-m-d') }}" name="date" id="date">
+                            {{ $information->date->format('l d F Y') }}
                         </div>
                     </div>
 
@@ -50,6 +52,8 @@
                         <label for="time">Tijd:</label>
 
                         <div class="font-weight-bold">
+                            <input type="hidden" value="{{ $information->starttime }}" id="starttime" name="starttime">
+                            <input type="hidden" value="{{ $information->endtime }}" id="endtime" name="endtime">
                             {{ $information->starttime->format('H:i') }} - {{ $information->endtime->format('H:i') }}
                         </div>
                     </div>
@@ -69,8 +73,7 @@
                         <label for="users">Met welke medespeler(s)</label>
 
                         <div>
-                            <select name="users" id="users">
-                                <option value="">Maak een keuze..</option>
+                            <select id="choices-multiple-remove-button" name="users[]" placeholder="Selecteer medespelers" multiple>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->firstname }} {{ $user->prefix }} {{ $user->lastname}} | {{ $user->member }}</option>
                                 @endforeach

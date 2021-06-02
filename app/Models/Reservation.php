@@ -22,6 +22,6 @@ class Reservation extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'reservations_users');
+        return $this->belongsToMany(User::class, 'users_reservations');
     }
 }

@@ -54,7 +54,7 @@
                                 @php
                                     $s = $reservations[$c]->filter(function ($value, $key) use ($i) {
                                         return date('H:i', mktime($i / 60, $i % 60)) == date("H:i",strtotime($value->starttime));
-                                    })
+                                    })->values();
                                 @endphp
 
                                 @if (isset($s[0]))

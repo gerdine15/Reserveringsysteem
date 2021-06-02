@@ -48,7 +48,6 @@ class HomeController extends Controller
                                             ->get();
         }
 
-        // dd($reservations);
 
         $starttime = 8 * 60;
         $endtime = 23 * 60;
