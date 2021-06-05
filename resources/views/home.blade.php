@@ -61,9 +61,9 @@
                                     Gereserveerd
                                 @else
                                     <form action="{{ url('/reservation/create') }}">
-                                        <input type="hidden" id="time" name="time" value="{{ date('H:i', mktime($i / 60, $i % 60)) }}">
-                                        <input type="hidden" id="date" name="date" value="{{ $date }}">
-                                        <input type="hidden" id ="courts_id" name="courts_id" value="{{ $courts[$c]->id }}">
+                                        <input type="hidden"name="time" value="{{ date('H:i', mktime($i / 60, $i % 60)) }}">
+                                        <input type="hidden" name="date" value="{{ $date }}">
+                                        <input type="hidden" name="courts_id" value="{{ $courts[$c]->id }}">
                                         <input type="submit" class="btn btn-primary" value="Reserveren">
                                     </form>
                                 @endif

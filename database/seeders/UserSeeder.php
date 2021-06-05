@@ -42,5 +42,32 @@ class UserSeeder extends Seeder
             'roles_id' => 3,
             'clubs_id' => 1,
         ]);
+        DB::table('users')->insert([
+            'firstname' => 'test',
+            'lastname' => 'lid',
+            'email' => 'lid1@tennisvereniging.nl',
+            'password' => Hash::make('admin'),
+            'member' => '24354678',
+            'roles_id' => 3,
+            'clubs_id' => 1,
+        ]);
+        DB::table('users')->insert([
+            'firstname' => 'test2',
+            'lastname' => 'lid',
+            'email' => 'lid2@tennisvereniging.nl',
+            'password' => Hash::make('admin'),
+            'member' => '26587462',
+            'roles_id' => 3,
+            'clubs_id' => 1,
+        ]);
+        DB::table('users')->insert([
+            'firstname' => 'test3',
+            'lastname' => 'lid',
+            'email' => 'lid3@tennisvereniging.nl',
+            'password' => Hash::make('admin'),
+            'member' => '32643255',
+            'roles_id' => 3,
+            'clubs_id' => 1,
+        ]);
     }
 }

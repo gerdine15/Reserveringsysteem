@@ -24,8 +24,13 @@ class ReservationController extends Controller
 
     public function create(Request $request)
     {
-        $users = User::all() ?? [];
+        $users = User::where('member', '<>', null)->get();
         $user = Auth::user();
+
+        $filtered_users = $users->filter(function ($value, $key) use($user){
+            return $value['id'] != $user->id;
+        });
+
         $setting = Setting::where('clubs_id', $user->clubs_id)->first();
         $court = Court::where('id', $request->courts_id)->first();
 
@@ -37,7 +42,7 @@ class ReservationController extends Controller
         $information->courtNumber = $court->number;
         $information->courtType = $court->type;
 
-        return view('pages.reservations.create', ['users' => $users, 'user' => $user, 'information' => $information]);
+        return view('pages.reservations.create', ['users' => $filtered_users, 'user' => $user, 'information' => $information]);
     }
 
     public function store(Request $request)
@@ -72,6 +77,5 @@ class ReservationController extends Controller
 
         DB::commit();
         return redirect(route('home', ['date' => $request->date]))->with('success', 'Baan succesvol gereserveerd!');
-
     }
 }

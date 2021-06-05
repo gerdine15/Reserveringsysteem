@@ -26,14 +26,8 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::resource('reservation', ReservationController::class);
     Route::resource('setting', SettingController::class);
-    // Route::put('setting/{id}/update', 'SettingController@update')->where('id', '[1-9][0-9]*');
     Route::resource('court', CourtController::class);
     Route::resource('user', UserController::class);
-    // Route::get('/home/change-date', [HomeController::class, 'changeDate'])->name('changeDate');
-
-    // Route::post('/changeDate', 'HomeController@changeDate');
-    // Route::post('/dayEarlier','HomeController@dayEarlier');
-    // Route::post('/dayLater', 'HomeController@dayLater');
 });
 
 Auth::routes();
