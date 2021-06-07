@@ -24,7 +24,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-7 col-sm-12">
+        <div class="col-md-12 col-sm-12">
             <form action="{{ route('setting.update', ['setting' => $setting]) }}" class="form-horizontal mt-4 row" method="POST">
                 @method('PUT')
                 @csrf

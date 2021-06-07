@@ -70,3 +70,7 @@ $('#deleteUserPicture').on('click', function(e) {
 $('#addNewUserPictureFile').on('change', function(e) {
     $('#addProfilePhoto').submit();
 });
+
+$('#addUserPictureFile').on('change', function(e) {
+    $('#addProfilePhoto').submit();
+});

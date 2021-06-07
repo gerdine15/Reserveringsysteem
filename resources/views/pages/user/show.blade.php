@@ -25,9 +25,9 @@
     </div>
 
     <div class="row">
-        <div class="col-md-7 col-sm-12">
+        <div class="col-md-12 col-sm-12">
             <div class="row">
-                <div class="col">
+                <div class="col-6">
                     <div class="form-group">
                         <label for="firstname" class="font-weight-bold">
                             Voornaam:
@@ -87,15 +87,30 @@
                             {{ $user->club->name }}
                         </div>
                     </div>
+
+                    <button class="btn btn-secondary w-50 mt-2">
+                        <a href="{{ route('password.request') }}" class="text-white">
+                            Wachtwoord wijzigen
+                        </a>
+                    </button>
                 </div>
-                <div class="col">
+                <div class="col-6">
                     <div class="form-group">
                         @if ($user->picture)
-                            <img class="w-50 p-1 userPicture rounded-circle border border-dark" src="{{ route('get_user_image', ['id' => $user->id, 'filename' => $user->picture]) }}" alt="" id="userPicture">
+                            <img class="w-25 p-1 userPicture rounded-circle border border-dark" src="{{ route('get_user_image', ['id' => $user->id, 'filename' => $user->picture]) }}" alt="" id="userPicture">
 
-                            <button id="deleteUserPicture" type="button" class="deleteUserPictureBtn"><i class='fas fa-trash'></i></button>
+                            <div>
+                                <button id="deleteUserPicture" class="deleteUserPictureBtn btn btn-secondary w-25 mt-2">
+                                    Nieuwe foto
+                                </button>
+                            </div>
 
-                            <input type="file" id="addUserPictureFile" name="picture" class="d-none deleteUserPhotoFile">
+
+                            <form id="addProfilePhoto" class="mb-0" enctype="multipart/form-data" method="POST" action="{{ route('save_user_image', ['user' => $user]) }}">
+                                @csrf
+                                @method('PUT')
+                                <input type="file" id="addUserPictureFile" name="picture" class="d-none deleteUserPhotoFile">
+                            </form>
                         @else
                             <form id="addProfilePhoto" class="mb-0" enctype="multipart/form-data" method="POST" action="{{ route('save_user_image', ['user' => $user]) }}">
                                 @csrf
