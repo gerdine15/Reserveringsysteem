@@ -13,7 +13,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="firstname">{{ __('Voornaam') }}</label>
+                                    <label for="firstname">Voornaam</label>
 
                                     <div>
                                         <input id="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" value="{{ old('firstname') }}" placeholder="Voornaam" autocomplete="firstname" autofocus>
@@ -27,7 +27,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="prefix">{{ __('Tussenvoegsel') }}</label>
+                                    <label for="prefix">Tussenvoegsel</label>
 
                                     <div>
                                         <input id="prefix" type="text" class="form-control @error('prefix') is-invalid @enderror" name="prefix" value="{{ old('prefix') }}" placeholder="Tussenvoegsel" autocomplete="prefix" autofocus>
@@ -41,7 +41,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="lastname">{{ __('Achternaam') }}</label>
+                                    <label for="lastname">Achternaam</label>
 
                                     <div>
                                         <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}" placeholder="Achternaam"  autocomplete="lastname" autofocus>
@@ -55,7 +55,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="email">{{ __('E-mailadres') }}</label>
+                                    <label for="email">E-mailadres</label>
 
                                     <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" @if(old('email')) value="{{ old('email') }}" @endif id="username" placeholder="E-mailadres" autocomplete="email" autofocus>
 
@@ -69,7 +69,7 @@
 
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="password">{{ __('Wachtwoord') }}</label>
+                                    <label for="password">Wachtwoord</label>
 
                                     <div>
                                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Wachtwoord" autocomplete="new-password">
@@ -83,7 +83,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="password-confirm">{{ __('Wachtwoord bevestiging') }}</label>
+                                    <label for="password-confirm">Wachtwoord bevestiging</label>
 
                                     <div>
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
@@ -91,7 +91,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="clubNumber">{{ __('Clubnummer') }}</label>
+                                    <label for="clubNumber">Clubnummer</label>
 
                                     <div>
                                         <input id="clubNumber" type="text" class="form-control @error('clubNumber') is-invalid @enderror" name="clubNumber" value="{{ old('clubNumber') }}" placeholder="Clubnummer" autocomplete="clubNumber" autofocus>
@@ -105,7 +105,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="member">{{ __('Lidnummer') }}</label>
+                                    <label for="member">Lidnummer</label>
 
                                     <div>
                                         <input id="member" type="text" class="form-control @error('member') is-invalid @enderror" name="member" value="{{ old('member') }}" placeholder="Lidnummer" autocomplete="member" autofocus>
@@ -123,14 +123,14 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    Registreer
                                 </button>
                             </div>
                         </div>
                     </form>
 
                     <p>
-                        Heb je al een account? <a href="{{ __('login') }}">Inloggen...</a>
+                        Heb je al een account? <a href="{{ route('login') }}">Inloggen...</a>
                     </p>
                 </div>
             </div>
