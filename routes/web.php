@@ -4,6 +4,7 @@ use App\Http\Controllers\CourtController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\StorageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('setting', SettingController::class);
     Route::resource('court', CourtController::class);
     Route::resource('user', UserController::class);
+
+    Route::put('/user/{user}/deleteUserImage', [UserController::class, 'deleteUserImage'])->name('delete_user_image');
+    Route::get('/storage/app/user/{id}/{filename}', [StorageController::class, 'get'])->name('get_user_image');
+    Route::put('/user/{user}/saveUserImage', [UserController::class, 'saveUserImage'])->name('save_user_image');
 });
 
 Auth::routes();

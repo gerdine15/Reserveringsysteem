@@ -18,7 +18,6 @@ $("#changeUserRoleModal").on('shown.bs.modal', function (e) {
     });
 });
 
-
 $("#changeUserRoleBtn").on('click', function (e) {
     $.ajax({
         type : 'PUT',
@@ -39,4 +38,35 @@ $("#changeUserRoleBtn").on('click', function (e) {
             console.log(data);
         }
     });
+});
+
+$('#deleteUserPicture').on('click', function(e) {
+    e.preventDefault();
+    let id = document.getElementById('user_id');
+    let deleteUserPictureBtn = document.querySelector('.deleteUserPictureBtn'); // needs to be hidden
+    let deleteUserPhotoFile = document.querySelector('.deleteUserPhotoFile'); // needs to be shown
+    let userPicture = document.querySelector('.userPicture'); // needs to be hidden
+
+    $.ajax(
+        "/user/" + id.value + "/deleteUserImage",
+    {
+        dataType: 'json',
+        success:function(data){
+            deleteUserPictureBtn.classList.add('d-none');
+            userPicture.classList.add('d-none');
+            deleteUserPhotoFile.classList.remove('d-none');
+        },
+        error:function(data) {
+            console.log(data);
+        },
+        type : 'PUT',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+
+    });
+});
+
+$('#addNewUserPictureFile').on('change', function(e) {
+    $('#addProfilePhoto').submit();
 });
