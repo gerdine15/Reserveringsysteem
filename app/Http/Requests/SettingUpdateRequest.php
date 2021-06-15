@@ -35,8 +35,8 @@ class SettingUpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'amountOfReservations' => 'Je moet een getal invullen.',
-            'timeslot' => 'Er moet een tijd staan in minuten',
+            'amountOfReservations.required' => 'Je moet een getal invullen.',
+            'timeslot.required' => 'Er moet een tijd staan in minuten',
         ];
     }
 }

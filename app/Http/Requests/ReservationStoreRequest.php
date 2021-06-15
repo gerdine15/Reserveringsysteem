@@ -25,6 +25,24 @@ class ReservationStoreRequest extends FormRequest
     {
         return [
             //
+            'userId' => 'required',
+            'date' => 'required',
+            'starttime' => 'required',
+            'endtime' => 'required',
+            'courts_id' => 'required',
+            'users' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'userId.required' => 'De gebruiker id is veplicht.',
+            'date.required' => 'Er is geen datum geselecteerd.',
+            'starttime.required' => 'Er is geen starttijd geselecteerd.',
+            'endtime.required' => 'Er is geen eindtijd geselecteerd.',
+            'courts_id' => 'Er is geen baan geselecteerd.',
+            'users.required' => 'Selecteer minimaal 1 medespeler.',
         ];
     }
 }

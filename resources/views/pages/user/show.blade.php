@@ -89,7 +89,7 @@
                     </div>
 
                     <button class="btn btn-secondary w-50 mt-2">
-                        <a href="{{ route('password.request') }}" class="text-white">
+                        <a href="{{ route('password.request') }}" class="text-white text-decoration-none">
                             Wachtwoord wijzigen
                         </a>
                     </button>
@@ -101,10 +101,9 @@
 
                             <div>
                                 <button id="deleteUserPicture" class="deleteUserPictureBtn btn btn-secondary w-25 mt-2">
-                                    Nieuwe foto
+                                    Verwijder foto
                                 </button>
                             </div>
-
 
                             <form id="addProfilePhoto" class="mb-0" enctype="multipart/form-data" method="POST" action="{{ route('save_user_image', ['user' => $user]) }}">
                                 @csrf

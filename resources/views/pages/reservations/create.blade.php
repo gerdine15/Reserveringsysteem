@@ -37,6 +37,12 @@
                             {{ $user->prefix }}
                             {{ $user->lastname }}
                         </div>
+
+                        @error('userId')
+                            <span class="text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="form-group">
@@ -46,6 +52,12 @@
                             <input type="hidden" value="{{ $information->date->format('Y-m-d') }}" name="date" id="date">
                             {{ $information->date->format('l d F Y') }}
                         </div>
+
+                        @error('date')
+                            <span class="text-danger" role="alert">
+                                {{ $message }}
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="form-group">
@@ -56,6 +68,18 @@
                             <input type="hidden" value="{{ $information->endtime }}" id="endtime" name="endtime">
                             {{ $information->starttime->format('H:i') }} - {{ $information->endtime->format('H:i') }}
                         </div>
+
+                        @error('starttime')
+                            <span class="text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
+                        @error('endtime')
+                            <span class="text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="form-group">
@@ -65,12 +89,63 @@
                             <input type="hidden" id="courts_id" name="courts_id" value="{{ $information->courts_id }}">
                             {{ $information->courtNumber }} | {{ $information->courtType }}
                         </div>
+
+                        @error('courts_id')
+                            <span class="text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
 
                 <div class="col">
-                    <div class="form-group">
-                        <label for="users">Met welke medespeler(s)</label>
+                    @if (Auth::user()->roles_id == 1 || Auth::user()->roles_id == 2)
+                        <div class="form-group">
+                            <label for="reservationKind">Soort reservering:</label>
+
+                            <div>
+                                <select name="reservationKind" id="reservationKind" class="form-control">
+                                    @foreach ($reservationsKinds as $kind)
+                                        <option value="{{ $kind->id }}">{{ $kind->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group d-none" id="eventReservation">
+                            <label for="nameEvent">Naam evenement:</label>
+
+                            <div>
+                                <input type="text" id="nameEvent" name="nameEvent" value="{{ old('nameEvent') }}" class="form-control">
+
+                                @error('nameEvent')
+                                    <span class="text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group d-none" id="classReservation">
+                            <label for="repeatReservation">Herhaling?:</label>
+
+                            <div>
+                                <select name="repeatReservation" id="repeatReservation" class="form-control">
+                                    <option value="false">Nee</option>
+                                    <option value="true">Ja</option>
+                                </select>
+
+                                @error('repeatReservation')
+                                    <span class="text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="form-group" id="normalReservation">
+                        <label for="users">Met welke medespeler(s):</label>
 
                         <div>
                             <select id="choices-multiple-remove-button" name="users[]" placeholder="Selecteer medespelers" multiple>
@@ -79,8 +154,8 @@
                                 @endforeach
                             </select>
 
-                            @error ('users')
-                                <span class="invalid-feedback" role="alert">
+                            @error('users')
+                                <span class="text-danger" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror

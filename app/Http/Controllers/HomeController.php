@@ -6,6 +6,7 @@ use App\Models\Club;
 use App\Models\Court;
 use App\Models\Reservation;
 use App\Models\Setting;
+use App\Models\Timeslot;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
@@ -33,7 +34,10 @@ class HomeController extends Controller
         $user = Auth::user();
         $courts = Court::where('clubs_id', $user->clubs_id)->get();
         $setting = Setting::where('clubs_id', $user->clubs_id)->first();
+        $timeslots = Timeslot::where('settings_id', $setting->id)->get();
         $reservations = [];
+
+        $minutes = $setting->timeslot;
 
         if ($request->date) {
             $date = Carbon::parse($request->date);
@@ -48,6 +52,25 @@ class HomeController extends Controller
                                             ->get();
         }
 
+        foreach ($timeslots as $timeslot)
+        {
+            $dates = array();
+            $startdate = strtotime(Carbon::parse($timeslot->startdate));
+            $enddate = strtotime(Carbon::parse($timeslot->enddate));
+            $stepVal = '+1 day';
+            while( $startdate <= $enddate ) {
+                $dates[] = date("Y-m-d", $startdate);
+                $startdate = strtotime($stepVal, $startdate);
+            }
+
+            foreach ($dates as $timeslot_date) {
+                if (Carbon::parse($timeslot_date) == $date)
+                {
+                    $minutes = $timeslot->minutes;
+                }
+            }
+
+        }
 
         $starttime = 8 * 60;
         $endtime = 23 * 60;
@@ -58,7 +81,7 @@ class HomeController extends Controller
             'reservations' => $reservations,
             'starttime' => $starttime,
             'endtime' => $endtime,
-            'timeslot' => $setting->timeslot,
+            'timeslot' => $minutes,
             'date' => $date,
             'previousDay' => $date->copy()->subDays(),
             'nextDay' => $date->copy()->addDay(),

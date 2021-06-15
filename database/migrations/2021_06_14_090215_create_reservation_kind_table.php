@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSettingsTable extends Migration
+class CreateReservationKindTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('reservation_kind', function (Blueprint $table) {
             $table->id();
-            $table->integer('timeslot')->default(60);
-            $table->integer('amountOfReservations')->default(2);
+            $table->string('name');
             $table->timestamps();
-
-            $table->unsignedBigInteger('clubs_id')->nullable();
-            $table->foreign('clubs_id')->references('id')->on('clubs')->onDelete('cascade');
         });
     }
 
@@ -31,6 +27,6 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('reservation_kind');
     }
 }

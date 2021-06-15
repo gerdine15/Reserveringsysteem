@@ -12,12 +12,20 @@ class Setting extends Model
     protected $fillable = [
         'timeslot',
         'amountOfReservations',
-        'startdate',
-        'enddate',
     ];
 
     public function club()
     {
         return $this->hasOne(Club::class);
+    }
+
+    public function timeslot()
+    {
+        return $this->belongsTo(Timeslot::class);
+    }
+
+    public function reservationkinds()
+    {
+        return $this->hasMany(ReservationKind::class, 'reservation_kind');
     }
 }

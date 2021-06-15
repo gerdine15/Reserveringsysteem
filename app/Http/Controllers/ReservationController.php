@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ReservationStoreRequest;
 use App\Models\Court;
 use App\Models\Reservation;
+use App\Models\ReservationKind;
 use App\Models\Setting;
 use App\Models\User;
 use Carbon\Carbon;
@@ -31,25 +32,32 @@ class ReservationController extends Controller
             return $value['id'] != $user->id;
         });
 
+        $reservationsKinds = ReservationKind::get();
         $setting = Setting::where('clubs_id', $user->clubs_id)->first();
         $court = Court::where('id', $request->courts_id)->first();
 
         $information = new stdClass();
         $information->starttime = Carbon::parse($request->time);
-        $information->endtime = Carbon::parse($request->time)->addMinutes($setting->timeslot);
+        $information->endtime = Carbon::parse($request->time)->addMinutes($request->timeslot);
         $information->date = Carbon::parse($request->date);
         $information->courts_id = $request->courts_id;
         $information->courtNumber = $court->number;
         $information->courtType = $court->type;
 
-        return view('pages.reservations.create', ['users' => $filtered_users, 'user' => $user, 'information' => $information]);
+        return view('pages.reservations.create', [
+            'users' => $filtered_users,
+            'user' => $user,
+            'information' => $information,
+            'reservationsKinds' => $reservationsKinds
+        ]);
     }
 
-    public function store(Request $request)
+    public function store(ReservationStoreRequest $request)
     {
         DB::beginTransaction();
 
         try {
+
             $user = User::find($request->userId);
 
             $request->starttime = Carbon::parse($request->starttime)->format('H:i');

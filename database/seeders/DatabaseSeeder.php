@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             CourtSeeder::class,
             ReservationSeeder::class,
+            ReservationKindSeeder::class,
         ]);
     }
 }

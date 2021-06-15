@@ -20,6 +20,7 @@
             <h1>
                 Instellingen
             </h1>
+            <input type="hidden" id="clubs_id" value="{{ $setting->clubs_id }}">
         </div>
     </div>
 
@@ -34,10 +35,10 @@
                         <label for="timeslot">Tijd reserveringsslot (minuten):</label>
 
                         <div>
-                            <input type="text" id="timeslot" name="timeslot" value={{ $setting->timeslot }}>
+                            <input type="text" id="timeslot" name="timeslot" value={{ $setting->newTimeslot ?? $setting->timeslot }}>
 
                             @error('timeslot')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger d-block" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -51,7 +52,7 @@
                             <input type="text" id="amountOfReservations" name="amountOfReservations" value="{{ $setting->amountOfReservations ?? old('amountOfReservations') }}">
 
                             @error('amountOfReservations')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger d-block" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -71,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col date">
+                <div class="col d-none" id="startingDate">
                     <div class="form-group">
                         <label for="startdate">Start datum nieuwe reserveringsslot:</label>
 
@@ -79,7 +80,7 @@
                             <input type="date" id="startdate" name="startdate" value="{{ $setting->startdate ?? old('startdate') }}">
 
                             @error('startdate')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger d-block" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -93,7 +94,7 @@
                             <input type="date" id="enddate" name="enddate" value="{{ $setting->enddate ?? old('enddate') }}">
 
                             @error('enddate')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger d-block" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror

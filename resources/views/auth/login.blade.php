@@ -2,17 +2,19 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Inloggen</div>
-
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-12">
+            <div class="card col-md-7">
                 <div class="card-body">
+                    <h2>
+                        Inloggen
+                    </h2>
+
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="form-group">
-                            <label for="email">E-mail adres</label>
+                            <label for="email">E-mailadres</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -53,7 +55,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-secondary">
                                     Inloggen
                                 </button>
 

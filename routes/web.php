@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/user/{user}/deleteUserImage', [UserController::class, 'deleteUserImage'])->name('delete_user_image');
     Route::get('/storage/app/user/{id}/{filename}', [StorageController::class, 'get'])->name('get_user_image');
     Route::put('/user/{user}/saveUserImage', [UserController::class, 'saveUserImage'])->name('save_user_image');
+
+    Route::get('/setting/{club}/getLatestReservation', [SettingController::class, 'getLatestReservation'])->name('get_latest_reservation');
 });
 
 Auth::routes();
