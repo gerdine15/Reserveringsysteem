@@ -59,14 +59,16 @@
 
                             @if (isset($s[0]))
                                 Gereserveerd
-                            @else
+                            @elseif ($date >= $today)
                                 <form action="{{ url('/reservation/create') }}">
                                     <input type="hidden"name="time" value="{{ date('H:i', mktime($i / 60, $i % 60)) }}">
                                     <input type="hidden" name="date" value="{{ $date }}">
                                     <input type="hidden" name="courts_id" value="{{ $courts[$c]->id }}">
                                     <input type="hidden" name="timeslot" value="{{ $timeslot }}">
-                                    <input type="submit" class="btn btn-primary" value="Reserveren">
+                                    <input type="submit" class="btn btn-secondary" value="Reserveren">
                                 </form>
+                            @else
+                                <button class="btn btn-secondary" disabled>Reserveren</button>
                             @endif
                         </td>
                     @endfor

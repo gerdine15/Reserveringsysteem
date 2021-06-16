@@ -34,7 +34,8 @@ class HomeController extends Controller
         $user = Auth::user();
         $courts = Court::where('clubs_id', $user->clubs_id)->get();
         $setting = Setting::where('clubs_id', $user->clubs_id)->first();
-        $timeslots = Timeslot::where('settings_id', $setting->id)->get();
+        // dd($user);
+        $timeslots = Timeslot::where('settings_id', $setting->id)->get() ?? [];
         $reservations = [];
 
         $minutes = $setting->timeslot;
@@ -83,6 +84,7 @@ class HomeController extends Controller
             'endtime' => $endtime,
             'timeslot' => $minutes,
             'date' => $date,
+            'today' => Carbon::today(),
             'previousDay' => $date->copy()->subDays(),
             'nextDay' => $date->copy()->addDay(),
         ]);

@@ -35,7 +35,8 @@
                         <label for="timeslot">Tijd reserveringsslot (minuten):</label>
 
                         <div>
-                            <input type="text" id="timeslot" name="timeslot" value={{ $setting->newTimeslot ?? $setting->timeslot }}>
+                            <input type="text" id="timeslot" name="timeslot" value="@if($newTimeslot){{ old('timeslot') ?? $newTimeslot }}"@else{{ old('timeslot') ?? $setting->timeslot }}@endif>
+                            <input type="hidden" id="timeslot_id" name="timeslot_id" value="{{ $timeslot->id ?? '' }}">
 
                             @error('timeslot')
                                 <span class="text-danger d-block" role="alert">
@@ -49,7 +50,7 @@
                         <label for="amountOfReservations">Maximale aantal reserveringen:</label>
 
                         <div>
-                            <input type="text" id="amountOfReservations" name="amountOfReservations" value="{{ $setting->amountOfReservations ?? old('amountOfReservations') }}">
+                            <input type="text" id="amountOfReservations" name="amountOfReservations" value="{{ old('amountOfReservations') ?? $setting->amountOfReservations }}">
 
                             @error('amountOfReservations')
                                 <span class="text-danger d-block" role="alert">
@@ -72,12 +73,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="col d-none" id="startingDate">
+                <div class="col @if(!$newTimeslot) d-none @endif" id="startingDate">
                     <div class="form-group">
                         <label for="startdate">Start datum nieuwe reserveringsslot:</label>
 
                         <div>
-                            <input type="date" id="startdate" name="startdate" value="{{ $setting->startdate ?? old('startdate') }}">
+                            <input type="date" id="startdate" name="startdate" value="@if(!$newTimeslot){{ old('startdate') }}@else{{ old('startdate') ?? $timeslot->startdate }}@endif">
 
                             @error('startdate')
                                 <span class="text-danger d-block" role="alert">
@@ -91,7 +92,7 @@
                         <label for="enddate">Tot</label>
 
                         <div>
-                            <input type="date" id="enddate" name="enddate" value="{{ $setting->enddate ?? old('enddate') }}">
+                            <input type="date" id="enddate" name="enddate" value="@if(!$newTimeslot){{ old('enddate') }}@else{{ old('enddate') ?? $timeslot->enddate }}@endif">
 
                             @error('enddate')
                                 <span class="text-danger d-block" role="alert">

@@ -14,6 +14,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class SettingController extends Controller
 {
@@ -22,8 +23,25 @@ class SettingController extends Controller
     {
         $user = Auth::user();
         $setting = Setting::where('clubs_id', $user->clubs_id)->first();
+        $timeslots = Timeslot::where('settings_id', $setting->id)->get();
+        $today = Carbon::now();
+        $newTimeslot = null;
+        $timeslotObj = null;
 
-        return view('pages.settings.index', ['setting' => $setting]);
+        foreach ($timeslots as $timeslot)
+        {
+            if (Carbon::parse($timeslot->endtime) >= $today)
+            {
+                $newTimeslot = $timeslot->minutes;
+                $timeslotObj = $timeslot;
+            }
+        }
+
+        return view('pages.settings.index', [
+            'setting' => $setting,
+            'newTimeslot' => $newTimeslot,
+            'timeslot' => $timeslotObj,
+        ]);
     }
 
     public function update(SettingUpdateRequest $request, Setting $setting)
@@ -35,13 +53,20 @@ class SettingController extends Controller
         try
         {
             $setting->amountOfReservations = $validated['amountOfReservations'];
+
             if ($validated['timeslot'] !== $setting->timeslot)
             {
-                $timeslot = new Timeslot();
+                if ($request->timeslot_id)
+                {
+                    $timeslot = Timeslot::find($request->timeslot_id);
+                } else {
+                    $timeslot = new Timeslot();
+                    $timeslot->settings_id = $setting->id;
+                }
                 $timeslot->minutes = $validated['timeslot'];
                 $timeslot->startdate = $validated['startdate'];
                 $timeslot->enddate = $validated['enddate'];
-                $timeslot->settings_id = $setting->id;
+
                 $timeslot->save();
             }
             $setting->save();
@@ -77,6 +102,9 @@ class SettingController extends Controller
             return redirect()->back()->with('error', 'Er is iets fout gegaan.');
         }
         DB::commit();
-        return json_encode(Carbon::parse($time)->addDay()->format('Y-m-d'));
+        return json_encode([
+            'startdate' => Carbon::parse($time)->addDay()->format('Y-m-d'),
+            'enddate' => Carbon::parse($time)->addDay(8)->format('Y-m-d')
+        ]);
     }
 }

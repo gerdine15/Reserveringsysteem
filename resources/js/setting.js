@@ -12,15 +12,12 @@ $('#timeslot').on('change', function(e) {
         success:function(data){
             console.log(data);
             $('#startingDate').removeClass('d-none');
-            $('#startdate').val(data);
+            $('#startdate').val(data.startdate);
+            $('#enddate').val(data.enddate);
         },
         error:function(data) {
-            console.log(data);
+            // console.log(data);
         }
     })
 });
 
-// $('#timeslot').on('change', function(e) {
-//     var startingDate = document.getElementById('startingDate');
-//     startingDate.classList.remove('d-none');
-// });

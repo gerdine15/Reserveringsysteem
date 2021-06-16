@@ -25,11 +25,11 @@ class ReservationStoreRequest extends FormRequest
     {
         return [
             //
-            'userId' => 'required',
-            'date' => 'required',
+            'userId' => 'required|integer',
+            'date' => 'required|date',
             'starttime' => 'required',
-            'endtime' => 'required',
-            'courts_id' => 'required',
+            'endtime' => 'required|date',
+            'courts_id' => 'required|integer',
             'users' => 'required',
         ];
     }

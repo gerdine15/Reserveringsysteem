@@ -10,6 +10,7 @@ use App\Models\Setting;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -26,15 +27,27 @@ class ReservationController extends Controller
     public function create(Request $request)
     {
         $users = User::where('member', '<>', null)->get();
-        $user = Auth::user();
+        $authUser = Auth::user();
+        $reservationsKinds = ReservationKind::get();
+        $court = Court::where('id', $request->courts_id)->first();
+        $setting = Setting::where('id', $authUser->clubs_id)->first();
 
-        $filtered_users = $users->filter(function ($value, $key) use($user){
-            return $value['id'] != $user->id;
+        $filtered_users = $users->filter(function ($value, $key) use($authUser){
+            return $value['id'] != $authUser->id;
         });
 
-        $reservationsKinds = ReservationKind::get();
-        $setting = Setting::where('clubs_id', $user->clubs_id)->first();
-        $court = Court::where('id', $request->courts_id)->first();
+        foreach ($users as $user)
+        {
+            $userCount = Reservation::whereHas('users', function (Builder $query) use ($user) {
+                $query->where('user_id', $user->id);
+            })->count();
+
+            if ($userCount >= $setting->amountOfReservations) {
+                $filtered_users = $filtered_users->filter(function ($value, $key) use($user) {
+                    return $value['id'] != $user->id;
+                });
+            }
+        }
 
         $information = new stdClass();
         $information->starttime = Carbon::parse($request->time);
@@ -46,7 +59,7 @@ class ReservationController extends Controller
 
         return view('pages.reservations.create', [
             'users' => $filtered_users,
-            'user' => $user,
+            'user' => $authUser,
             'information' => $information,
             'reservationsKinds' => $reservationsKinds
         ]);

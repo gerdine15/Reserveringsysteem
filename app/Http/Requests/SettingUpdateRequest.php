@@ -25,18 +25,22 @@ class SettingUpdateRequest extends FormRequest
     {
         return [
             //
-            'amountOfReservations' => 'required',
-            'timeslot' => 'required',
-            'startdate' => 'nullable',
-            'enddate' => 'nullable',
+            'amountOfReservations' => 'required|integer',
+            'timeslot' => 'required|integer',
+            'startdate' => 'sometimes|required',
+            'enddate' => 'sometimes|required',
         ];
     }
 
     public function messages()
     {
         return [
-            'amountOfReservations.required' => 'Je moet een getal invullen.',
-            'timeslot.required' => 'Er moet een tijd staan in minuten',
+            'amountOfReservations.required' => 'Dit veld is verplicht.',
+            'amountOfReservations.integer' => 'Dit veld moet een getal zijn.',
+            'timeslot.required' => 'Dit veld is verplicht.',
+            'timeslot.integer' => 'Dit veld moet een getal zijn.',
+            'startdate.required' => 'Dit veld is verplicht.',
+            'enddate.required' => 'Dit veld is verplicht',
         ];
     }
 }
