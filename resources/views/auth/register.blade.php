@@ -2,11 +2,13 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-center">
+            <div class="card col-md-8">
                 <div class="card-body">
-                    <h3>Registreren</h1>
+                    <h3 class="text-center mb-3r">
+                        Registreren
+                    </h3>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
@@ -120,9 +122,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6">
-                                <button type="submit" class="btn btn-primary">
+                        <div class="form-group row mt-3 mb-3 text-center">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-secondary w-25">
                                     Registreer
                                 </button>
                             </div>

@@ -35,7 +35,7 @@
                         <label for="timeslot">Tijd reserveringsslot (minuten):</label>
 
                         <div>
-                            <input type="text" id="timeslot" name="timeslot" value="@if($newTimeslot){{ old('timeslot') ?? $newTimeslot }}"@else{{ old('timeslot') ?? $setting->timeslot }}@endif>
+                            <input type="text" id="timeslot" name="timeslot" value="@if($newTimeslot){{ old('timeslot') ?? $newTimeslot }}@else{{ old('timeslot') ?? $setting->timeslot }}@endif">
                             <input type="hidden" id="timeslot_id" name="timeslot_id" value="{{ $timeslot->id ?? '' }}">
 
                             @error('timeslot')

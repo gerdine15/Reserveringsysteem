@@ -42,11 +42,21 @@ class ReservationController extends Controller
                 $query->where('user_id', $user->id);
             })->count();
 
-            if ($userCount >= $setting->amountOfReservations) {
+            if ($userCount >= $setting->amountOfReservations)
+            {
                 $filtered_users = $filtered_users->filter(function ($value, $key) use($user) {
                     return $value['id'] != $user->id;
                 });
             }
+        }
+
+        $userCount = Reservation::whereHas('users', function (Builder $query) use ($authUser) {
+            $query->where('user_id', $authUser->id);
+        })->count();
+
+        if ($userCount >= $setting->amountOfReservations)
+        {
+            $reservationsKinds->forget(0);
         }
 
         $information = new stdClass();

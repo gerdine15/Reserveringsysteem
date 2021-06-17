@@ -50,7 +50,7 @@
 
                         <div class="font-weight-bold">
                             <input type="hidden" value="{{ $information->date->format('Y-m-d') }}" name="date" id="date">
-                            {{ $information->date->format('l d F Y') }}
+                            {{ $information->date->isoFormat('dddd D MMMM YYYY') }}
                         </div>
 
                         @error('date')
@@ -126,25 +126,12 @@
                             </div>
                         </div>
 
-                        <div class="form-group d-none" id="classReservation">
-                            <label for="repeatReservation">Herhaling?:</label>
-
-                            <div>
-                                <select name="repeatReservation" id="repeatReservation" class="form-control">
-                                    <option value="false">Nee</option>
-                                    <option value="true">Ja</option>
-                                </select>
-
-                                @error('repeatReservation')
-                                    <span class="text-danger" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        <div class="form-group @if($reservationsKinds->count() == 3) d-none @endif" id="classReservation">
+                            {{-- Eventueel later herhaling toevoegen. --}}
                         </div>
                     @endif
 
-                    <div class="form-group" id="normalReservation">
+                    <div class="form-group @if ($reservationsKinds->count() !== 3) d-none @endif" id="normalReservation">
                         <label for="users">Met welke medespeler(s):</label>
 
                         <div>

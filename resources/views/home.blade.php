@@ -22,7 +22,7 @@
                 </a>
 
                 <span class="currentDate">
-                    {{ $date->format('l d F Y') }}
+                    {{ $date->isoFormat('dddd D MMMM YYYY') }}
                 </span>
 
                 <input type="date" class="d-none" id="newDate" name="date">
@@ -59,7 +59,9 @@
 
                             @if (isset($s[0]))
                                 Gereserveerd
-                            @elseif ($date >= $today)
+                            @elseif ($date < $today || $userCount >= $setting->amountOfReservations)
+                                <button class="btn btn-secondary" disabled>Reserveren</button>
+                            @else
                                 <form action="{{ url('/reservation/create') }}">
                                     <input type="hidden"name="time" value="{{ date('H:i', mktime($i / 60, $i % 60)) }}">
                                     <input type="hidden" name="date" value="{{ $date }}">
@@ -67,8 +69,6 @@
                                     <input type="hidden" name="timeslot" value="{{ $timeslot }}">
                                     <input type="submit" class="btn btn-secondary" value="Reserveren">
                                 </form>
-                            @else
-                                <button class="btn btn-secondary" disabled>Reserveren</button>
                             @endif
                         </td>
                     @endfor

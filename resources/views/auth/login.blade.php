@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container">
-    <div class="row d-flex justify-content-center">
-        <div class="col-md-12">
-            <div class="card col-md-7">
-                <div class="card-body">
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-center">
+            <div class="card col-md-5">
+                <div class="card-body text-center">
                     <h2>
                         Inloggen
                     </h2>
@@ -14,9 +14,9 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="email">E-mailadres</label>
+                            <label for="email">E-mailadres:</label>
 
-                            <div class="col-md-6">
+                            <div>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
@@ -28,9 +28,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password">Wachtwoord</label>
+                            <label for="password">Wachtwoord:</label>
 
-                            <div class="col-md-6">
+                            <div>
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')
@@ -42,30 +42,28 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                            <button type="submit" class="btn btn-secondary">
+                                Inloggen
+                            </button>
+                        </div>
 
-                                    <label class="form-check-label" for="remember">
-                                        Onthoud mij
-                                    </label>
-                                </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                <label class="form-check-label" for="remember">
+                                    Onthoud mij
+                                </label>
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-secondary">
-                                    Inloggen
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        Wachtwoord vergeten?
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
+                        <div class="form-group text-left mt-4">
+                            @if (Route::has('password.request'))
+                               <a class="btn btn-link" href="{{ route('password.request') }}">
+                                   Wachtwoord vergeten?
+                               </a>
+                           @endif
+                       </div>
                     </form>
                 </div>
             </div>

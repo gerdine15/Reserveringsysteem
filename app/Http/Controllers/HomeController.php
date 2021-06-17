@@ -9,6 +9,7 @@ use App\Models\Setting;
 use App\Models\Timeslot;
 use Carbon\Carbon;
 use DateTime;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,7 +35,6 @@ class HomeController extends Controller
         $user = Auth::user();
         $courts = Court::where('clubs_id', $user->clubs_id)->get();
         $setting = Setting::where('clubs_id', $user->clubs_id)->first();
-        // dd($user);
         $timeslots = Timeslot::where('settings_id', $setting->id)->get() ?? [];
         $reservations = [];
 
@@ -70,8 +70,11 @@ class HomeController extends Controller
                     $minutes = $timeslot->minutes;
                 }
             }
-
         }
+
+        $userCount = Reservation::whereHas('users', function (Builder $query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->count();
 
         $starttime = 8 * 60;
         $endtime = 23 * 60;
@@ -87,6 +90,8 @@ class HomeController extends Controller
             'today' => Carbon::today(),
             'previousDay' => $date->copy()->subDays(),
             'nextDay' => $date->copy()->addDay(),
+            'userCount' => $userCount,
+            'setting' => $setting,
         ]);
     }
 }
