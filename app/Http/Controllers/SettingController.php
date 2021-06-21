@@ -60,13 +60,13 @@ class SettingController extends Controller
         }
         DB::beginTransaction();
 
-        $validated = $request->validated();
+        // $validated = $request->validated();
 
         try
         {
-            $setting->amountOfReservations = $validated['amountOfReservations'];
+            $setting->amountOfReservations = $request->amountOfReservations;
 
-            if ($validated['timeslot'] !== $setting->timeslot)
+            if (intval($request->timeslot) !== $setting->timeslot)
             {
                 if ($request->timeslot_id)
                 {
@@ -75,9 +75,13 @@ class SettingController extends Controller
                     $timeslot = new Timeslot();
                     $timeslot->settings_id = $setting->id;
                 }
-                $timeslot->minutes = $validated['timeslot'];
-                $timeslot->startdate = $validated['startdate'];
-                $timeslot->enddate = $validated['enddate'];
+                $timeslot->minutes = $request->timeslot;
+
+                if ($request->timeslot)
+                {
+                    $timeslot->startdate = $request->startdate;
+                    $timeslot->enddate = $request->enddate;
+                }
 
                 $timeslot->save();
             }
@@ -85,7 +89,7 @@ class SettingController extends Controller
         } catch (Exception $e)
         {
             DB::rollback();
-            // dd($e);
+            dd($e);
             return redirect()->back()->with('error', 'Er is iets fout gegaan.');
         }
 

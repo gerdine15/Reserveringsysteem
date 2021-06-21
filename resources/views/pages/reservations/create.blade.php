@@ -106,13 +106,13 @@
                             <div>
                                 <select name="reservationKind" id="reservationKind" class="form-control">
                                     @foreach ($reservationsKinds as $kind)
-                                        <option value="{{ $kind->id }}">{{ $kind->name }}</option>
+                                        <option value="{{ $kind->id }}" @if (old('reservationKind')) selected @endif>{{ $kind->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
 
-                        <div class="form-group d-none" id="eventReservation">
+                        <div class="form-group d-none @error('nameEvent') d-block @enderror" id="eventReservation">
                             <label for="nameEvent">Naam evenement:</label>
 
                             <div>
@@ -131,7 +131,7 @@
                         </div>
                     @endif
 
-                    <div class="form-group @if ($reservationsKinds->count() !== 3) d-none @endif" id="normalReservation">
+                    <div class="form-group @if ($reservationsKinds->count() !== 3) d-none @endif @error('nameEvent') d-none @enderror" id="normalReservation">
                         <label for="users">Met welke medespeler(s):</label>
 
                         <div>

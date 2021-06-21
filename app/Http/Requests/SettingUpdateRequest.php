@@ -27,8 +27,8 @@ class SettingUpdateRequest extends FormRequest
             //
             'amountOfReservations' => 'required|integer',
             'timeslot' => 'required|integer',
-            'startdate' => 'sometimes|required',
-            'enddate' => 'sometimes|required',
+            'startdate' => ['exclude_if:timeslot,60', 'required'],
+            'enddate' => ['exclude_if:timeslot,60', 'required'],
         ];
     }
 

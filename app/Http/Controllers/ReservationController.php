@@ -94,12 +94,20 @@ class ReservationController extends Controller
             $reservation->endtime = Carbon::parse($endtime);
             $reservation->courts_id = $request->courts_id;
             $reservation->reservations_kinds_id = $request->reservationKind;
+
+            if ($request->nameEvent)
+            {
+                $reservation->nameEvent = $request->nameEvent;
+            }
+
             $reservation->save();
 
-            foreach($request->users as $member)
-            {
-                $member = User::find($member);
-                $member->reservations()->attach($reservation);
+            if ($request->users) {
+                foreach($request->users as $member)
+                {
+                    $member = User::find($member);
+                    $member->reservations()->attach($reservation);
+                }
             }
 
             $user->reservations()->attach($reservation);

@@ -30,10 +30,9 @@ class ReservationStoreRequest extends FormRequest
             'starttime' => 'required',
             'endtime' => 'required|date',
             'courts_id' => 'required|integer',
-            'users' => 'required',
+            'users' => ['exclude_if:reservationKind,3', 'exclude_if:reservationKind,2', 'required'],
             'reservationKind' => 'required',
-            // 'nameEvent' => 'exclude_if:reservationKind,3',
-            'nameEvent' => 'nullable',
+            'nameEvent' => ['exclude_if:reservationKind,1', 'exclude_if:reservationKind,2', 'required'],
         ];
     }
 
@@ -46,6 +45,7 @@ class ReservationStoreRequest extends FormRequest
             'endtime.required' => 'Er is geen eindtijd geselecteerd.',
             'courts_id' => 'Er is geen baan geselecteerd.',
             'users.required' => 'Selecteer minimaal 1 medespeler.',
+            'nameEvent.required' => 'Dit veld is verplicht',
         ];
     }
 }

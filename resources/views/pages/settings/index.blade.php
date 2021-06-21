@@ -73,7 +73,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col @if(!$newTimeslot) d-none @endif" id="startingDate">
+                <div class="col @if(!$newTimeslot) d-none @endif @error('startdate') d-block @enderror @error('enddate') d-block @enderror" id="startingDate">
                     <div class="form-group">
                         <label for="startdate">Start datum nieuwe reserveringsslot:</label>
 
