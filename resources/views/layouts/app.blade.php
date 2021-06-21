@@ -26,9 +26,14 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+                @auth
+                    <img src="{{ route('get_logo_image', ['id' => Auth::user()->clubs_id]) }}" class="col-md-1">
+                @endauth
+                @guest
+                    <a class="navbar-brand">
+                        {{ config('app.name', 'Reserveringssysteem') }}
+                    </a>
+                @endguest
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

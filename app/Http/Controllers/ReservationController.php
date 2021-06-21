@@ -93,7 +93,13 @@ class ReservationController extends Controller
             $reservation->starttime = Carbon::parse($starttime);
             $reservation->endtime = Carbon::parse($endtime);
             $reservation->courts_id = $request->courts_id;
-            $reservation->reservations_kinds_id = $request->reservationKind;
+
+            if (Auth::user()->roles_id == 3)
+            {
+                $reservation->reservations_kinds_id = 1;
+            } else {
+                $reservation->reservations_kinds_id = $request->reservationKind;
+            }
 
             if ($request->nameEvent)
             {

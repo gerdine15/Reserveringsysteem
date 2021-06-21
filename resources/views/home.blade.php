@@ -60,12 +60,15 @@
                             @if (isset($s[0]))
                                 @if ($s[0]->reservations_kinds_id == 1)
                                     Gereserveerd
+                                    {{-- @foreach ($s[0]->users())
+                                        test
+                                    @endforeach --}}
                                 @elseif ($s[0]->reservations_kinds_id == 2)
                                     Les
                                 @elseif ($s[0]->reservations_kinds_id == 3)
                                     {{ $s[0]->nameEvent }}
                                 @endif
-                            @elseif ($date < $today || $userCount >= $setting->amountOfReservations)
+                            @elseif ($date < $today || $userCount >= $setting->amountOfReservations && Auth::user()->roles_id == 3)
                                 <button class="btn btn-secondary" disabled>Reserveren</button>
                             @else
                                 <form action="{{ url('/reservation/create') }}">
