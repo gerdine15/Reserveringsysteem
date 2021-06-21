@@ -11,6 +11,7 @@ use App\Models\Timeslot;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,8 +20,16 @@ use Illuminate\Support\Facades\Validator;
 class SettingController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
+        if (Auth::user()->roles_id !== 1){
+            abort('403');
+        }
         $user = Auth::user();
         $setting = Setting::where('clubs_id', $user->clubs_id)->first();
         $timeslots = Timeslot::where('settings_id', $setting->id)->get();
@@ -46,6 +55,9 @@ class SettingController extends Controller
 
     public function update(SettingUpdateRequest $request, Setting $setting)
     {
+        if (Auth::user()->roles_id !== 1){
+            abort('403');
+        }
         DB::beginTransaction();
 
         $validated = $request->validated();
@@ -83,6 +95,9 @@ class SettingController extends Controller
 
     public function getLatestReservation(Club $club)
     {
+        if (Auth::user()->roles_id !== 1){
+            abort('403');
+        }
         DB::beginTransaction();
 
         try

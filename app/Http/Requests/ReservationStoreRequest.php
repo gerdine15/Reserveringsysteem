@@ -31,6 +31,9 @@ class ReservationStoreRequest extends FormRequest
             'endtime' => 'required|date',
             'courts_id' => 'required|integer',
             'users' => 'required',
+            'reservationKind' => 'required',
+            // 'nameEvent' => 'exclude_if:reservationKind,3',
+            'nameEvent' => 'nullable',
         ];
     }
 

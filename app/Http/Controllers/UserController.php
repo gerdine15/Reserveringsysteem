@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,6 +16,9 @@ class UserController extends Controller
     //
     public function index()
     {
+        if (Auth::user()->roles_id !== 1){
+            abort('403');
+        }
         $users = User::all() ?? [];
         $roles = Role::get();
 
@@ -38,6 +42,9 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
+        if (Auth::user()->roles_id !== 1){
+            abort('403');
+        }
         DB::beginTransaction();
 
         try {

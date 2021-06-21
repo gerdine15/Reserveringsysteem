@@ -81,6 +81,7 @@ class ReservationController extends Controller
 
         try {
 
+            // dd($request);
             $user = User::find($request->userId);
 
             $request->starttime = Carbon::parse($request->starttime)->format('H:i');
@@ -92,6 +93,7 @@ class ReservationController extends Controller
             $reservation->starttime = Carbon::parse($starttime);
             $reservation->endtime = Carbon::parse($endtime);
             $reservation->courts_id = $request->courts_id;
+            $reservation->reservations_kinds_id = $request->reservationKind;
             $reservation->save();
 
             foreach($request->users as $member)
@@ -103,6 +105,7 @@ class ReservationController extends Controller
             $user->reservations()->attach($reservation);
         } catch(Exception $e) {
             DB::rollback();
+            // dd($e);
             return redirect()->back()->with('error', 'Er is iets fout gegaan.');
         }
 

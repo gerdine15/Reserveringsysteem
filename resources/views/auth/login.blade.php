@@ -6,7 +6,7 @@
         <div class="col-md-12 d-flex justify-content-center">
             <div class="card col-md-5">
                 <div class="card-body text-center">
-                    <h2>
+                    <h2 class="mb-3">
                         Inloggen
                     </h2>
 
@@ -42,28 +42,22 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-secondary">
+                            <button type="submit" class="btn btn-secondary w-50 mt-2">
                                 Inloggen
                             </button>
                         </div>
 
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                <label class="form-check-label" for="remember">
-                                    Onthoud mij
-                                </label>
-                            </div>
-                        </div>
-
                         <div class="form-group text-left mt-4">
                             @if (Route::has('password.request'))
-                               <a class="btn btn-link" href="{{ route('password.request') }}">
+                               <a href="{{ route('password.request') }}">
                                    Wachtwoord vergeten?
                                </a>
                            @endif
                        </div>
+
+                        <p class='text-left'>
+                            Heb je nog geen account? <a href="{{ route('register') }}">Registreren...</a>
+                        </p>
                     </form>
                 </div>
             </div>

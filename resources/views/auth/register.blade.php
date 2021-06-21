@@ -6,7 +6,7 @@
         <div class="col-md-12 d-flex justify-content-center">
             <div class="card col-md-8">
                 <div class="card-body">
-                    <h3 class="text-center mb-3r">
+                    <h3 class="text-center mb-3">
                         Registreren
                     </h3>
                     <form method="POST" action="{{ route('register') }}">
