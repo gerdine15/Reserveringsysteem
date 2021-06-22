@@ -69,7 +69,7 @@
 
                     <div class="form-group">
                         <div>
-                            <input type="submit" value="Opslaan">
+                            <input type="submit" value="Opslaan" class="btn btn-secondary">
                         </div>
                     </div>
                 </div>

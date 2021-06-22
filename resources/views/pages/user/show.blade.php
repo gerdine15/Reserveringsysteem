@@ -117,6 +117,12 @@
                                 <input id="addNewUserPictureFile" type="file" name="picture">
                             </form>
                         @endif
+
+                        @error('picture')
+                            <span class="text-danger d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
             </div>

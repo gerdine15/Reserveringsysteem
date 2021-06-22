@@ -134,9 +134,12 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'email' => [
+            'required' => 'Dit veld is verplicht',
         ],
+        'password' => [
+            'required' => 'Dit veld is verplicht',
+        ]
     ],
 
     /*

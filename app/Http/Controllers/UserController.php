@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserStoreRequest;
 use App\Models\Club;
 use App\Models\Role;
 use App\Models\User;
@@ -59,12 +60,8 @@ class UserController extends Controller
         return $user;
     }
 
-    public function saveUserImage(User $user, Request $request)
+    public function saveUserImage(User $user, UserStoreRequest $request)
     {
-        $request->validate([
-            'picture' => 'mimes:jpg,jpeg,png|max:2000'
-        ]);
-
         DB::beginTransaction();
         try {
             if($user->picture) {
