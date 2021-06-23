@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    //
+    /**
+     * Checking if the user has the rights to get to the user page.
+     * Getting all the users and roles to show on the user page.
+     */
     public function index()
     {
         if (Auth::user()->roles_id !== 1){
@@ -26,6 +29,9 @@ class UserController extends Controller
         return view('pages.user.index', ['users' => $users, 'roles' => $roles]);
     }
 
+    /**
+     * Getting the data of the user.
+     */
     public function show(Request $request, User $user)
     {
         if ($request->ajax()) {
@@ -41,6 +47,9 @@ class UserController extends Controller
         return view('pages.user.show', ['user' => $user]);
     }
 
+    /**
+     * Funciton to save the new role of the user.
+     */
     public function update(Request $request, User $user)
     {
         if (Auth::user()->roles_id !== 1){
@@ -60,6 +69,9 @@ class UserController extends Controller
         return $user;
     }
 
+    /**
+     * Saving the new image of the user.
+     */
     public function saveUserImage(User $user, UserStoreRequest $request)
     {
         DB::beginTransaction();
@@ -82,6 +94,10 @@ class UserController extends Controller
         return back();
     }
 
+    /**
+     * Deleting the image from the user in the database.
+     * And delete the directory where the image is stored.
+     */
     public function deleteUserImage(User $user)
     {
         DB::beginTransaction();

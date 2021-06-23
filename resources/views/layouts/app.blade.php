@@ -31,7 +31,7 @@
                 @endauth
                 @guest
                     <a class="navbar-brand">
-                        {{ config('app.name', 'Reserveringssysteem') }}
+                        Reserveringssysteem
                     </a>
                 @endguest
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -66,7 +66,7 @@
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registreren') }}</a>
                                 </li>
                             @endif
                         @else

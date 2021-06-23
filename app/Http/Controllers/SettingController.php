@@ -25,6 +25,11 @@ class SettingController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Check if user has the rights to get to this page.
+     * Getting the data to show on the page.
+     * Show the settings page.
+     */
     public function index()
     {
         if (Auth::user()->roles_id !== 1){
@@ -53,14 +58,17 @@ class SettingController extends Controller
         ]);
     }
 
+    /**
+     * Updating the settings.
+     * If the timeslot is not the same as in the settings table.
+     * Make a new object to put in the database.
+     */
     public function update(SettingUpdateRequest $request, Setting $setting)
     {
         if (Auth::user()->roles_id !== 1){
             abort('403');
         }
         DB::beginTransaction();
-
-        // $validated = $request->validated();
 
         try
         {
@@ -97,6 +105,9 @@ class SettingController extends Controller
         return redirect(route('setting.index'))->with('success', 'Instellingen succesvol gewijzigd.');
     }
 
+    /**
+     * Getting the date after the last reservation.
+     */
     public function getLatestReservation(Club $club)
     {
         if (Auth::user()->roles_id !== 1){

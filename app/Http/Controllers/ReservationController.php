@@ -18,12 +18,17 @@ use stdClass;
 
 class ReservationController extends Controller
 {
-    //
+    /**
+     * Where to redirect the user to when entering the application.
+     */
     public function index()
     {
         return view('pages.reservations.index');
     }
 
+    /**
+     * Create a reservation and returning to the reservation/create view with the data to show.
+     */
     public function create(Request $request)
     {
         $users = User::where('member', '<>', null)->get();
@@ -75,13 +80,15 @@ class ReservationController extends Controller
         ]);
     }
 
+    /**
+     *  Store the reservation into the database.
+     *  Check if the user is a member and make it a normal reservation.
+     */
     public function store(ReservationStoreRequest $request)
     {
         DB::beginTransaction();
 
         try {
-
-            // dd($request);
             $user = User::find($request->userId);
 
             $request->starttime = Carbon::parse($request->starttime)->format('H:i');

@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 
 class StorageController extends Controller
 {
-    //
+    /**
+     * Getting the path of the user image.
+     */
     public function get($id, $filename)
     {
         $path = storage_path("app/user/$id/$filename");
@@ -28,6 +30,9 @@ class StorageController extends Controller
         return $response;
     }
 
+    /**
+     * Getting the path of the logo of the club.
+     */
     public function getLogo($id)
     {
         $club = Club::find($id)->first();
