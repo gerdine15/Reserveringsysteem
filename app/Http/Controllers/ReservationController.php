@@ -31,6 +31,10 @@ class ReservationController extends Controller
      */
     public function create(Request $request)
     {
+        if (Carbon::parse($request->date) < Carbon::today()) {
+            return redirect(route('home', ['date' => $request->date]))->with('error', 'Er is iets fout gegaan.');
+        }
+
         $users = User::where('member', '<>', null)->get();
         $authUser = Auth::user();
         $reservationsKinds = ReservationKind::get();
