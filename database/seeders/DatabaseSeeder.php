@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             SettingSeeder::class,
             CourtSeeder::class,
-            ReservationKindSeeder::class,
+            ReservationkindSeeder::class,
             ReservationSeeder::class,
         ]);
     }
