@@ -18,6 +18,7 @@ class ClubSeeder extends Seeder
         DB::table('clubs')->insert([
             'name' => 'TestClub',
             'number' => '01234567',
+            'logo' => 'logo.png',
         ]);
     }
 }
