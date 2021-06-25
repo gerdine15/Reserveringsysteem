@@ -90,6 +90,7 @@ class HomeController extends Controller
             'today' => Carbon::today(),
             'previousDay' => $date->copy()->subDays(),
             'nextDay' => $date->copy()->addDay(),
+            'twoWeeks' => Carbon::today()->addDay(14),
             'userCount' => $userCount,
             'setting' => $setting,
         ]);

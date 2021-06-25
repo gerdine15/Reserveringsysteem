@@ -6,7 +6,7 @@ $('#newDate').on('change', function(e) {
     e.preventDefault();
     let newDate = document.getElementById('newDate');
     let date = newDate.value;
-    console.log(date);
+    // console.log(date);
 
     window.location.href = '/home?date=' + date;
 

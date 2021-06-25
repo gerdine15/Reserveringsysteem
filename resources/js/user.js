@@ -13,7 +13,7 @@ $("#changeUserRoleModal").on('shown.bs.modal', function (e) {
         },
         error:function(data) {
             //
-            console.log(data);
+            // console.log(data);
         }
     });
 });
@@ -35,7 +35,7 @@ $("#changeUserRoleBtn").on('click', function (e) {
             window.location.reload();
         },
         error:function(data) {
-            console.log(data);
+            // console.log(data);
         }
     });
 });
@@ -57,7 +57,7 @@ $('#deleteUserPicture').on('click', function(e) {
             deleteUserPhotoFile.classList.remove('d-none');
         },
         error:function(data) {
-            console.log(data);
+            // console.log(data);
         },
         type : 'PUT',
         headers: {

@@ -73,6 +73,9 @@ class SettingController extends Controller
         try
         {
             $setting->amountOfReservations = $request->amountOfReservations;
+            $club = Club::find($setting->clubs_id)->first();
+            $latestReservation = $this->getLatestReservation($club);
+            $latestReservationJson = json_decode($latestReservation);
 
             if (intval($request->timeslot) !== $setting->timeslot)
             {
@@ -87,6 +90,14 @@ class SettingController extends Controller
 
                 if ($request->timeslot)
                 {
+                    if ($request->startdate < $latestReservationJson->startdate)
+                    {
+                        return redirect()->back()->with('error', 'Er staan reserveringen op deze datum');
+                    }
+                    if ($request->startdate > $request->enddate)
+                    {
+                        return redirect()->back()->with('error', 'De einddatum moet later zijn dan de startdatum');
+                    }
                     $timeslot->startdate = $request->startdate;
                     $timeslot->enddate = $request->enddate;
                 }
