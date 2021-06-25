@@ -68,7 +68,7 @@
                                 @elseif ($s[0]->reservations_kinds_id == 3)
                                     {{ $s[0]->nameEvent }}
                                 @endif
-                            @elseif (($date < $today || $date > $twoWeeks  || $userCount >= $setting->amountOfReservations) && Auth::user()->roles_id == 3)
+                            @elseif ($date < $today || $date > $twoWeeks  || $userCount >= $setting->amountOfReservations && Auth::user()->roles_id == 3)
                                 <button class="btn btn-secondary" disabled>Reserveren</button>
                             @else
                                 <form action="{{ url('/reservation/create') }}">
