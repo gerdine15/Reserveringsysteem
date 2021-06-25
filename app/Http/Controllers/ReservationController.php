@@ -32,7 +32,7 @@ class ReservationController extends Controller
     public function create(Request $request)
     {
         if (Carbon::parse($request->date) < Carbon::today() || Carbon::parse($request->date) > Carbon::today()->addDay(14)) {
-            return redirect(route('home', ['date' => Carbon::today()->format('Y-m-d')]))->with('error', 'Je mag voor deze datum geen reservering doen.');
+            return redirect(route('home', ['date' => Carbon::parse($request->date)->format('Y-m-d')]))->with('error', 'Je mag voor deze datum geen reservering doen.');
         }
 
         $users = User::where('member', '<>', null)->get();
